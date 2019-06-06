@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="score">Счет 0</div>
+<div class="main">
+	
+	<img src="dirt.svg" alt="" class="hole">
+	<img src="dirt.svg" alt="" class="hole">
+	<img src="dirt.svg" alt="" class="hole">
+	<img src="dirt.svg" alt="" class="hole">
+	<img src="dirt.svg" alt="" class="hole">
+	<img src="dirt.svg" alt="" class="hole">
+</div>
+<script type="text/javascript">
+	let main = document.querySelector('.main');
+	let scoresheet= document.querySelector('.score');
+	let holes = document.querySelectorAll('.hole');
+	let scorepoints = 0
+
+	let img = document.createElement('img');
+	document.body.appendChild(img);
+	img.classList.add('krot');
+
+	var lastrand=0
+
+	setInterval(show,500)
+
+	function show(){
+		let rand= Math.floor(Math.random()* holes.length)
+		if(rand != lastrand){
+			img.src='mole.svg'
+			img.style.top=holes[rand].getBoundingClientRect().top-130 + 'px'
+			img.style.left=holes[rand].getBoundingClientRect().left+30  + 'px'
+		}lastrand= rand
+	}
+
+	img.onclick=function(){
+		if(scorepoints>=5){
+		img.style.display='none'
+		var div = document.createElement('div')
+		document.body.appendChild(div)
+		div.classList.add('win')
+		div.innerHTML='you win'
+		main.style.display="none";
+		}else{
+		scorepoints++
+		scoresheet.innerHTML='Счет ' + scorepoints
+	}
+}
+</script>
+</body>
+</html>
